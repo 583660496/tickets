@@ -1,0 +1,192 @@
+  [1m[36m (45.4ms)[0m  [1mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "artist" varchar, "description" text, "price_low" decimal, "price_high" decimal, "event_date" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (4.1ms)[0m  CREATE TABLE "tickets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "seat_id_seq" varchar, "address" text, "price_paid" decimal, "email_address" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "phone" varchar) 
+  [1m[36m (5.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (4.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (3.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160120160241')[0m
+  [1m[35m (6.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160107153438')
+  [1m[36m (3.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160118151735')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (0.1ms)[0m  [1mDELETE FROM "tickets"[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "tickets" ("name", "seat_id_seq", "address", "price_paid", "email_address", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', 9.99, 'MyString', '2016-01-23 16:29:54', '2016-01-23 16:29:54', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "tickets" ("name", "seat_id_seq", "address", "price_paid", "email_address", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', 9.99, 'MyString', '2016-01-23 16:29:54', '2016-01-23 16:29:54', 298486374)[0m
+  [1m[35mFixture Delete (0.0ms)[0m  DELETE FROM "events"
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "events" ("artist", "description", "price_low", "price_high", "event_date", "created_at", "updated_at", "id") VALUES ('MyString', 'MyText', 9.99, 9.99, '2016-01-20', '2016-01-23 16:29:54', '2016-01-23 16:29:54', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "events" ("artist", "description", "price_low", "price_high", "event_date", "created_at", "updated_at", "id") VALUES ('MyString', 'MyText', 9.99, 9.99, '2016-01-20', '2016-01-23 16:29:54', '2016-01-23 16:29:54', 298486374)
+  [1m[36m (5.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+------------------------------------------------
+TicketsControllerTest: test_should_update_ticket
+------------------------------------------------
+  [1m[36mTicket Load (0.2ms)[0m  [1mSELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by TicketsController#update as HTML
+  Parameters: {"ticket"=>{"address"=>"MyText", "email_address"=>"MyString", "name"=>"MyString", "price_paid"=>"9.99", "seat_id_seq"=>"MyString"}, "id"=>"980190962"}
+  [1m[35mTicket Load (0.1ms)[0m  SELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/tickets/980190962
+Completed 302 Found in 9ms (ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+------------------------------------------------
+TicketsControllerTest: test_should_create_ticket
+------------------------------------------------
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "tickets"
+Processing by TicketsController#create as HTML
+  Parameters: {"ticket"=>{"address"=>"MyText", "email_address"=>"MyString", "name"=>"MyString", "price_paid"=>"9.99", "seat_id_seq"=>"MyString"}}
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tickets" ("name", "seat_id_seq", "address", "price_paid", "email_address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "MyString"], ["seat_id_seq", "MyString"], ["address", "MyText"], ["price_paid", 9.99], ["email_address", "MyString"], ["created_at", "2016-01-23 16:29:54.987041"], ["updated_at", "2016-01-23 16:29:54.987041"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/tickets/980190963
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "tickets"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+-------------------------------------------
+TicketsControllerTest: test_should_get_edit
+-------------------------------------------
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by TicketsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mTicket Load (0.0ms)[0m  SELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1  [["id", 980190962]]
+  Rendered tickets/_form.html.erb (28.2ms)
+  Rendered tickets/edit.html.erb within layouts/application (37.4ms)
+Completed 200 OK in 850ms (Views: 849.3ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+----------------------------------------------
+TicketsControllerTest: test_should_show_ticket
+----------------------------------------------
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by TicketsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mTicket Load (0.1ms)[0m  SELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1  [["id", 980190962]]
+  Rendered tickets/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 17ms (Views: 16.1ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+--------------------------------------------
+TicketsControllerTest: test_should_get_index
+--------------------------------------------
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by TicketsController#index as HTML
+  [1m[35mTicket Load (0.1ms)[0m  SELECT "tickets".* FROM "tickets"
+  Rendered tickets/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+-------------------------------------------------
+TicketsControllerTest: test_should_destroy_ticket
+-------------------------------------------------
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "tickets"
+Processing by TicketsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "tickets" WHERE "tickets"."id" = ?[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/tickets
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "tickets"[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+------------------------------------------
+TicketsControllerTest: test_should_get_new
+------------------------------------------
+  [1m[35mTicket Load (0.1ms)[0m  SELECT  "tickets".* FROM "tickets" WHERE "tickets"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by TicketsController#new as HTML
+  Rendered tickets/_form.html.erb (2.6ms)
+  Rendered tickets/new.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 6ms (Views: 5.7ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+----------------------------------------------
+EventsControllerTest: test_should_create_event
+----------------------------------------------
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "events"
+Processing by EventsController#create as HTML
+  Parameters: {"event"=>{"artist"=>"MyString", "description"=>"MyText", "event_date"=>"2016-01-20", "price_high"=>"9.99", "price_low"=>"9.99"}}
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "events" ("artist", "description", "price_low", "price_high", "event_date", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["artist", "MyString"], ["description", "MyText"], ["price_low", 9.99], ["price_high", 9.99], ["event_date", "2016-01-20"], ["created_at", "2016-01-23 16:29:55.909879"], ["updated_at", "2016-01-23 16:29:55.909879"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/events/980190963
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "events"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+-----------------------------------------
+EventsControllerTest: test_should_get_new
+-----------------------------------------
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by EventsController#new as HTML
+  Rendered events/_form.html.erb (14.5ms)
+  Rendered events/new.html.erb within layouts/application (26.1ms)
+Completed 200 OK in 29ms (Views: 29.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+-----------------------------------------------
+EventsControllerTest: test_should_destroy_event
+-----------------------------------------------
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "events"[0m
+Processing by EventsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mEvent Load (0.0ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 980190962]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/events
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "events"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+-------------------------------------------
+EventsControllerTest: test_should_get_index
+-------------------------------------------
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by EventsController#index as HTML
+  [1m[35mEvent Load (0.1ms)[0m  SELECT "events".* FROM "events"
+  Rendered events/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+----------------------------------------------
+EventsControllerTest: test_should_update_event
+----------------------------------------------
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by EventsController#update as HTML
+  Parameters: {"event"=>{"artist"=>"MyString", "description"=>"MyText", "event_date"=>"2016-01-20", "price_high"=>"9.99", "price_low"=>"9.99"}, "id"=>"980190962"}
+  [1m[35mEvent Load (0.0ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/events/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+--------------------------------------------
+EventsControllerTest: test_should_show_event
+--------------------------------------------
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by EventsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mEvent Load (0.0ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1  [["id", 980190962]]
+  Rendered events/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+------------------------------------------
+EventsControllerTest: test_should_get_edit
+------------------------------------------
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by EventsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mEvent Load (0.0ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1  [["id", 980190962]]
+  Rendered events/_form.html.erb (2.8ms)
+  Rendered events/edit.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 5ms (Views: 4.9ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
